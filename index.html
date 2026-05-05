@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Your Companion Guide · Écire Health™</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0B1B3A;
+    --gold: #D4AF64;
+    --purple: #7B5EA7;
+    --sage: #3D8B5E;
+    --amber: #9A7420;
+    --text: #4A4260;
+    --muted: #7A7590;
+    --cream: #F7F4F0;
+    --warm-white: #FFFFF8;
+    --border: #E8E4DF;
+    --light-bg: #F9F7F4;
+    --red: #C04848;
+    --brown: #B07520;
+  }
+
+  body {
+    font-family: 'Playfair Display', Georgia, serif;
+    background: var(--cream);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--cream);
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a2a4a 100%);
+    padding: 32px 24px 24px;
+    color: #EDE8E0;
+  }
+  .header-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: #B8B0A4;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Banner */
+  .banner {
+    background: var(--warm-white);
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    font-size: 14px;
+    color: var(--sage);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Tabs */
+  .tab-bar {
+    display: flex;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 0 0 auto;
+    padding: 10px 8px 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    font-size: 10px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 54px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tab-btn.active {
+    border-bottom-color: var(--purple);
+    color: var(--purple);
+  }
+  .tab-icon { font-size: 15px; }
+
+  /* Content */
+  .content { padding: 16px 16px 40px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Typography */
+  .p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 18px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .section-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+  .science-box {
+    background: var(--light-bg);
+    border-left: 3px solid var(--purple);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: var(--text);
+    font-style: italic;
+    line-height: 1.75;
+  }
+
+  /* Strategy Cards */
+  .strategy-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .strategy-badge {
+    display: inline-block;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 10px;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .strategy-what {
+    font-size: 15px;
+    color: var(--navy);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .strategy-why {
+    font-size: 13px;
+    color: var(--purple);
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .strategy-how {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  /* Plate Picker */
+  .picker-item {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .picker-item.selected {
+    background: #F3EEFF;
+    border-color: var(--purple);
+  }
+  .picker-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .picker-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .picker-emoji { font-size: 18px; }
+  .picker-label { font-size: 14px; color: var(--navy); }
+  .picker-item.selected .picker-label { font-weight: 500; }
+  .picker-check { color: var(--purple); font-size: 16px; }
+  .picker-detail {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .picker-amount { font-size: 13px; color: var(--sage); font-weight: 500; font-family: 'DM Sans', system-ui, sans-serif; }
+  .picker-tip { font-size: 12px; color: var(--muted); margin-top: 2px; font-style: italic; }
+
+  /* Plate Summary */
+  .plate-summary {
+    background: #fff;
+    border: 2px solid var(--purple);
+    border-radius: 12px;
+    padding: 18px;
+    margin-top: 24px;
+    display: none;
+  }
+  .plate-summary.visible { display: block; }
+  .plate-summary-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 10px;
+    color: var(--purple);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .plate-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #F0EDE8;
+    font-size: 14px;
+  }
+  .plate-row:last-of-type { border-bottom: none; }
+  .plate-row-name { color: var(--navy); }
+  .plate-footer {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--purple);
+    font-style: italic;
+  }
+  .clear-btn {
+    margin-top: 12px;
+    width: 100%;
+    padding: 8px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* Recipe / Workout Accordion */
+  .accordion {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .accordion-header {
+    padding: 14px 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .accordion-title { font-size: 15px; color: var(--navy); font-weight: 500; }
+  .accordion-sub { font-size: 12px; color: var(--text); margin-top: 2px; }
+  .accordion-meta {
+    display: flex;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .accordion-meta span {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 11px;
+  }
+  .meta-protein { color: var(--sage); }
+  .meta-time { color: var(--amber); }
+  .accordion-arrow {
+    color: var(--muted);
+    transition: transform 0.2s;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .accordion-arrow.open { transform: rotate(180deg); }
+  .accordion-body {
+    padding: 0 16px 16px;
+    border-top: 1px solid #F0EDE8;
+    display: none;
+  }
+  .accordion-body.open { display: block; }
+  .ingredient-label, .steps-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+  .ingredient-item {
+    font-size: 13px;
+    color: var(--text);
+    padding: 3px 0;
+    border-bottom: 1px solid #F5F3F0;
+  }
+  .ingredient-item:last-child { border-bottom: none; }
+  .step-item {
+    font-size: 13px;
+    color: var(--text);
+    padding: 6px 0;
+    line-height: 1.7;
+  }
+  .step-num { color: var(--purple); font-weight: 600; }
+  .tip-box {
+    background: var(--light-bg);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--purple);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* Exercise rows */
+  .exercise-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #F0EDE8;
+    font-size: 14px;
+  }
+  .exercise-name { color: var(--navy); }
+  .exercise-detail { color: var(--muted); font-family: 'DM Sans', system-ui, sans-serif; font-size: 13px; }
+
+  /* Protein cards */
+  .protein-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .protein-card-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .protein-card-amount {
+    font-size: 13px;
+    color: var(--sage);
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  /* Walking cards */
+  .walk-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+  }
+  .walk-title { font-size: 15px; color: var(--navy); font-weight: 500; }
+  .walk-body { margin-top: 6px; font-size: 14px; color: var(--text); line-height: 1.8; }
+
+  /* Question cards */
+  .q-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .q-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--purple);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+  .q-text { font-size: 15px; color: var(--navy); font-weight: 500; }
+  .q-context { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 4px; line-height: 1.7; }
+
+  /* Special boxes */
+  .fold-in-box {
+    margin-top: 20px;
+    padding: 12px 16px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px dashed #B8B0A4;
+  }
+  .fold-in-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .not-doing-box {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: rgba(192,72,72,0.04);
+    border-radius: 10px;
+    border: 1px solid rgba(192,72,72,0.15);
+  }
+  .not-doing-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 10px;
+    color: var(--red);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .info-box {
+    background: var(--warm-white);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 16px;
+    border: 1px solid var(--border);
+  }
+  .expect-title {
+    font-size: 14px;
+    color: var(--navy);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .center-text { text-align: center; }
+  .rest-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+
+  /* Prep section */
+  .prep-group {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+  }
+  .prep-title { font-size: 14px; color: var(--navy); font-weight: 500; margin-bottom: 8px; }
+  .prep-item { font-size: 13px; margin-bottom: 4px; line-height: 1.8; }
+
+  /* Shopping list */
+  .shop-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 6px;
+  }
+  .shop-cat {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .shop-items { font-size: 13px; color: var(--text); line-height: 1.8; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 20px 16px 30px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-msg { font-style: italic; margin-bottom: 8px; }
+  .footer-motto { color: var(--amber); margin-bottom: 4px; }
+  .footer-sig { color: var(--muted); font-size: 12px; }
+
+  .assembly-line {
+    text-align: center;
+    padding: 14px;
+    font-size: 14px;
+    color: var(--sage);
+    font-weight: 500;
+  }
+  .fold-note {
+    text-align: center;
+    padding: 16px;
+    font-size: 13px;
+    color: var(--sage);
+    font-style: italic;
+  }
+  .app-note {
+    background: var(--warm-white);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 20px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  .recipe-closer {
+    background: var(--light-bg);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 20px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  .workout-meta {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 11px;
+    color: var(--amber);
+    margin-top: 2px;
+  }
+  /* Password Screen */
+  .gate {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0B1B3A 0%, #1a2a4a 100%);
+    padding: 24px;
+  }
+  .gate-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 32px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+  }
+  .gate-brand {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .gate-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .gate-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .gate-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 16px;
+    color: var(--navy);
+    text-align: center;
+    letter-spacing: 3px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .gate-input:focus { border-color: var(--purple); }
+  .gate-input.error { border-color: var(--red); animation: shake 0.4s ease; }
+  .gate-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 14px;
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .gate-btn:hover { background: #6A4F94; }
+  .gate-error-msg {
+    font-size: 13px;
+    color: var(--red);
+    margin-top: 12px;
+    min-height: 20px;
+  }
+  .gate-footer {
+    margin-top: 24px;
+    font-size: 11px;
+    color: #B8B0A4;
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  .container.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-brand">Écire Health™</div>
+    <div class="gate-title">Your Companion Guide</div>
+    <div class="gate-sub">Enter the access code Dr. Hammond sent you.</div>
+    <input class="gate-input" id="gateInput" type="text" placeholder="Access code" autocomplete="off" autofocus>
+    <button class="gate-btn" id="gateBtn" onclick="checkCode()">Open Guide</button>
+    <div class="gate-error-msg" id="gateError"></div>
+    <div class="gate-footer">This guide is private and personalized for you.</div>
+  </div>
+</div>
+
+<div class="container hidden" id="mainContent">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-label">Écire Health™ · Week 1</div>
+    <div class="header-title">Your Companion Guide</div>
+    <div class="header-sub">A collection of resources — the why behind each strategy, practical ideas, and answers to your questions.</div>
+  </div>
+
+  <div class="banner">This week, every plate starts with protein. Everything else fills in around it.</div>
+
+  <!-- TABS -->
+  <div class="tab-bar" id="tabBar">
+    <button class="tab-btn active" data-tab="strategy"><span class="tab-icon">✦</span><span>Strategy</span></button>
+    <button class="tab-btn" data-tab="plate"><span class="tab-icon">🍽</span><span>Your Plate</span></button>
+    <button class="tab-btn" data-tab="recipes"><span class="tab-icon">📖</span><span>Recipes</span></button>
+    <button class="tab-btn" data-tab="protein"><span class="tab-icon">🥚</span><span>Protein</span></button>
+    <button class="tab-btn" data-tab="training"><span class="tab-icon">💪🏾</span><span>Training</span></button>
+    <button class="tab-btn" data-tab="walking"><span class="tab-icon">👟</span><span>Walking</span></button>
+    <button class="tab-btn" data-tab="questions"><span class="tab-icon">💬</span><span>Questions</span></button>
+  </div>
+
+  <div class="content">
+
+    <!-- ═══════ STRATEGY TAB ═══════ -->
+    <div class="tab-panel active" id="panel-strategy">
+      <p class="p" style="font-size:12px;color:var(--muted);font-style:italic;margin-bottom:16px;line-height:1.7">Not a checklist. Not instructions. Each strategy here targets a specific process in your body. The science is here — not as homework, but so you can see for yourself how the pieces connect.</p>
+
+      <div class="strategy-card">
+        <span class="strategy-badge" style="background:var(--purple)">Every Day</span>
+        <div class="strategy-what">Protein — 130g per day, protein first at every meal.</div>
+        <div class="strategy-why">Your body has been underfed. It's been breaking down muscle for fuel. Protein reverses this — and within 3–5 days, your satiety hormones respond and cravings begin to quiet.</div>
+        <div class="strategy-how">~43g per meal. The idea is to reach for the protein first on the plate. See the Your Plate tab to build meals from whatever you have on hand.</div>
+      </div>
+
+      <div class="strategy-card">
+        <span class="strategy-badge" style="background:var(--purple)">Every Day</span>
+        <div class="strategy-what">Your 8pm evening anchor.</div>
+        <div class="strategy-why">When insulin falls before sleep, your body releases stored fat overnight. Growth hormone mobilizes it from visceral stores — the fat behind your midsection. The anchor protects this entire sequence.</div>
+        <div class="strategy-how">You already have the alarm — and it's working most nights. For late work nights, having pre-made protein in the fridge (hard-boiled eggs with pepper sauce, cottage cheese) so the midnight choice is protein-forward without any effort.</div>
+      </div>
+
+      <div class="strategy-card">
+        <span class="strategy-badge" style="background:var(--purple)">Every Day</span>
+        <div class="strategy-what">Your three supplements.</div>
+        <div class="strategy-why">Vitamin D at 16 impairs insulin sensitivity. Magnesium is required for every unit of energy your mitochondria produce. Omega-3 interrupts the inflammatory cycle.</div>
+        <div class="strategy-how">With breakfast: Sports Research D3+K2 softgel + Nordic Naturals Ultimate Omega Liquid (1 tsp, lemon, no pill). Before bed: Pure Encapsulations Magnesium Glycinate or Natural Calm powder in warm water.</div>
+      </div>
+
+      <div class="strategy-card">
+        <span class="strategy-badge" style="background:var(--purple)">Every Day</span>
+        <div class="strategy-what">Tracking in MyÉcire — about 60 seconds.</div>
+        <div class="strategy-why">I review your data before every session. Continuous data means I can adjust in real time — before you even walk in.</div>
+        <div class="strategy-how">Protein (estimated grams), fasting window, sleep, supplements. That's all — nothing complicated.</div>
+      </div>
+
+      <div class="strategy-card">
+        <span class="strategy-badge" style="background:var(--sage)">2× This Week</span>
+        <div class="strategy-what">Resistance training — 20 minutes.</div>
+        <div class="strategy-why">Your muscles handle ~80% of glucose disposal. Every session activates transporters that clear blood sugar without insulin. This is the most direct intervention for your A1c.</div>
+        <div class="strategy-how">Bodyweight at home is fully valid. See the Training tab for three workouts. If you'd like, message me in the app — we can design the plan together.</div>
+      </div>
+
+      <div class="strategy-card">
+        <span class="strategy-badge" style="background:var(--brown)">This Week</span>
+        <div class="strategy-what">Your lab order is ready.</div>
+        <div class="strategy-why">Fasting insulin catches resistance 5–10 years before A1c. These labs reveal what your current tests are hiding.</div>
+        <div class="strategy-how">Rupa Health link coming by email. 10–12 hour fast, water is fine. ~$93–150.</div>
+      </div>
+
+      <div class="strategy-card">
+        <span class="strategy-badge" style="background:var(--brown)">This Week</span>
+        <div class="strategy-what">Your supplement list.</div>
+        <div class="strategy-why">These depletions drag on every other intervention.</div>
+        <div class="strategy-how">Sports Research D3+K2 — Amazon/Target · ~$15/mo. Pure Encapsulations Mg Glycinate OR Natural Calm — Amazon/Whole Foods · ~$20/mo. Nordic Naturals Omega Liquid — Amazon/Whole Foods/Sprouts · ~$30/mo. About $65/mo total.</div>
+      </div>
+
+      <div class="fold-in-box">
+        <div class="fold-in-label">Fold In When Ready — No Pressure</div>
+        <p class="p" style="margin-bottom:6px">10-minute walk after dinner (start with 5 if 10 feels like too much)</p>
+        <p class="p" style="margin-bottom:6px">Ceremonial matcha in the morning (no sugar — yours has too much)</p>
+        <p class="p" style="margin-bottom:0">Magic Stardust — hemp hearts + chia + flax, 2 tbsp on anything</p>
+      </div>
+
+      <div class="not-doing-box">
+        <div class="not-doing-label">What We Are Not Doing</div>
+        <p class="p" style="margin-bottom:6px">No calorie counting. No restriction. No metabolic fasting. No scale.</p>
+        <p class="p" style="margin-bottom:0;font-style:italic">Your spiritual fasting is yours — we protect it completely. Your body has been underfed. 130g of protein is not a diet. It is permission to eat.</p>
+      </div>
+    </div>
+
+    <!-- ═══════ YOUR PLATE TAB ═══════ -->
+    <div class="tab-panel" id="panel-plate">
+      <div class="section-title">Build Your Plate</div>
+      <p class="p">A tool to help you build a plate that reaches ~43g of protein from whatever you have on hand. Pick your protein, add sides, and see your plate.</p>
+      <div class="science-box">Protein first — then starch, vegetables, and a healthy fat. When protein is eaten before carbohydrates, it slows gastric emptying and blunts your post-meal glucose spike by 30–40%. Same food, different order, measurably different blood sugar response.</div>
+
+      <div class="section-label" style="margin-top:20px">Step 1 · What protein did you make? (tap one)</div>
+      <div id="proteinPicker"></div>
+
+      <div class="section-label">Step 2 · Add a starch (tap one)</div>
+      <div id="starchPicker"></div>
+
+      <div class="section-label">Step 3 · Add a vegetable (tap one)</div>
+      <div id="vegPicker"></div>
+
+      <div class="section-label">Step 4 · Add a healthy fat (tap one)</div>
+      <div id="fatPicker"></div>
+
+      <div class="plate-summary" id="plateSummary">
+        <div class="plate-summary-label">Your Plate</div>
+        <div id="plateRows"></div>
+        <div class="plate-footer" id="plateFooter"></div>
+        <button class="clear-btn" onclick="clearPlate()">Clear plate &amp; start over</button>
+      </div>
+
+      <div class="section-label" style="margin-top:28px">🗓 Sunday Prep — One Hour, Whole Week</div>
+      <p class="p">When protein and vegetables are prepped ahead of time, meals become assembly. One hour on Sunday changes the whole week.</p>
+
+      <div class="prep-group">
+        <div class="prep-title">Batch Proteins — pick two</div>
+        <p class="prep-item">🍗 Chicken breasts (4–5): Season, bake 400°F 22–25 min. Slice or shred.</p>
+        <p class="prep-item">🍗 Chicken thighs (6–8): Suya spice. Bake 400°F 30–35 min.</p>
+        <p class="prep-item">🥘 Ground turkey (2 lbs): Brown with cumin, paprika, garlic.</p>
+        <p class="prep-item">🥚 Hard-boiled eggs (12): Boil, peel, store. Keep 5 days.</p>
+      </div>
+      <div class="prep-group">
+        <div class="prep-title">Batch Starches</div>
+        <p class="prep-item">🍠 Sweet potato/yam: Cube, oil, cinnamon. Roast 400°F 25–30 min.</p>
+        <p class="prep-item">🎃 Pumpkin/butternut: Cube, oil, paprika, nutmeg. Roast 400°F 25–30 min.</p>
+        <p class="prep-item">🍌 Plantain: Slice diagonal, olive oil, salt. Bake 375°F 25 min.</p>
+        <p class="prep-item">🍚 Rice: Cook big batch. Portion. Reheats with a splash of water.</p>
+      </div>
+      <div class="prep-group">
+        <div class="prep-title">Batch Vegetables — roast a full tray</div>
+        <p class="prep-item">Pick 3–4: bell peppers, red onion, zucchini, broccoli, cherry tomatoes, green beans, cauliflower. Toss with olive oil, garlic powder, salt, pepper. Roast 400°F 20–25 min.</p>
+      </div>
+
+      <div class="assembly-line">Assembly = protein + starch + roasted vegetables + a handful of fresh greens + done.</div>
+
+      <div class="section-label" style="margin-top:20px">Your Weekly Shopping List</div>
+      <div class="shop-card"><div class="shop-cat">Proteins</div><div class="shop-items">Chicken breasts or thighs (2 lbs) · Eggs (2 dozen) · Ground turkey (1–2 lbs) · Salmon (3–4 fillets) · Greek yogurt, plain (large tub) · Cottage cheese (2–3 containers)</div></div>
+      <div class="shop-card"><div class="shop-cat">Starches</div><div class="shop-items">Sweet potatoes/yams (4–5) · Pumpkin or butternut (1) · Plantains (3–4 ripe) · Brown rice or basmati</div></div>
+      <div class="shop-card"><div class="shop-cat">Vegetables</div><div class="shop-items">Spinach (fresh/frozen) · Bell peppers (3–4) · Tomatoes + tomato paste · Onions (red & yellow) · Zucchini (2–3) · Broccoli or green beans · Avocados (3–4) · Lemons & limes</div></div>
+      <div class="shop-card"><div class="shop-cat">Écire Essentials</div><div class="shop-items">Hemp hearts — Manitoba Harvest (Costco, Target, Amazon) · Chia seeds (any grocery) · Ground flaxseed — Bob's Red Mill · Ceremonial matcha — Jade Leaf (Amazon) · Cashews or almonds</div></div>
+    </div>
+
+    <!-- ═══════ RECIPES TAB ═══════ -->
+    <div class="tab-panel" id="panel-recipes">
+      <div class="section-title">Recipes — When You Want Something New</div>
+      <p class="p">The Your Plate tab helps you build meals from whatever you have on hand. These recipes are here when you want to try something different.</p>
+
+      <div class="section-label" style="margin-top:16px">Breakfast</div>
+      <div id="recipes-breakfast"></div>
+      <div class="section-label">Lunch</div>
+      <div id="recipes-lunch"></div>
+      <div class="section-label">Dinner</div>
+      <div id="recipes-dinner"></div>
+      <div class="section-label">Late Night</div>
+      <div id="recipes-latenight"></div>
+
+      <div class="recipe-closer">
+        <p class="p" style="margin-bottom:0;color:var(--purple);font-style:italic">These recipes are here whenever you want something new — flavourful, satisfying, and designed around your protocol.</p>
+      </div>
+    </div>
+
+    <!-- ═══════ PROTEIN TAB ═══════ -->
+    <div class="tab-panel" id="panel-protein">
+      <div class="section-title">Quick Protein Reference</div>
+      <p class="p">A quick-glance guide — how much of each source gives you ~43g.</p>
+      <div id="proteinCards"></div>
+      <div class="science-box">When your body gets enough protein, it triggers GLP-1 and PYY — gut hormones that produce real, lasting fullness. Within 3–5 days of consistent 130g, cravings quiet. This is not willpower. This is chemistry.</div>
+    </div>
+
+    <!-- ═══════ TRAINING TAB ═══════ -->
+    <div class="tab-panel" id="panel-training">
+      <div class="section-title">Resistance Training</div>
+      <p class="p">You asked what this means. Resistance training is any exercise where your muscles work against a force — body weight, dumbbells, or machines. It does not mean CrossFit or heavy barbells. It means: challenging your muscles enough that they adapt.</p>
+      <div class="science-box">Every time your muscles contract, they activate GLUT4 transporters that pull glucose from your blood without needing insulin. Each session improves sensitivity for 24–48 hours. Two sessions per week means improvement more days than not.</div>
+      <p class="p" style="font-weight:500;color:var(--navy)">Pick one. Any one. They all work.</p>
+      <div id="workouts"></div>
+      <div class="info-box">
+        <div class="expect-title">What to Expect</div>
+        <p class="p" style="margin-bottom:0">First session may feel awkward — normal. By session 3–4, movements feel familiar. Within two weeks, you feel stronger — your nervous system learning to use muscle you already have. Stronger before bigger.</p>
+      </div>
+    </div>
+
+    <!-- ═══════ WALKING TAB ═══════ -->
+    <div class="tab-panel" id="panel-walking">
+      <div class="section-title">The Post-Meal Walk</div>
+      <p class="p">You said there's friction — and you're right. Here are options built around your real life.</p>
+      <div class="science-box">A 10-minute walk after eating activates GLUT4 transporters through AMPK — your muscles pull glucose from your blood without needing insulin. The spike flattens within minutes.</div>
+
+      <div class="walk-card"><div class="walk-title">After dinner — your best window</div><div class="walk-body">Some ideas: walking around the block, walking inside — stairs, around the house, talking to one of your kids. Even 5 minutes to the end of the street and back is enough to start.</div></div>
+      <div class="walk-card"><div class="walk-title">After lunch at work — the stealth walk</div><div class="walk-body">Some options: refilling your water, walking to a colleague's desk, trying the furthest bathroom, or going downstairs and back up — the stairs alone are enough. You don't need workout clothes.</div></div>
+      <div class="walk-card"><div class="walk-title">Breakfast in the car — already covered</div><div class="walk-body">The walk from your parking spot into work counts. Parking a little further away gives you a few extra minutes. The glucose is being cleared while you walk in.</div></div>
+
+      <div class="fold-note">This is a fold-in — not a Foundation goal. Do it when it works. Skip it when it doesn't. There is no failure here.</div>
+    </div>
+
+    <!-- ═══════ QUESTIONS TAB ═══════ -->
+    <div class="tab-panel" id="panel-questions">
+      <div class="section-title">Let's Finish Designing Your Week</div>
+      <p class="p">We ran out of time. You can respond in MyÉcire, or just hold onto them for Session 2. No pressure either way.</p>
+
+      <div id="questionCards"></div>
+
+      <div class="app-note">
+        <p class="p" style="margin-bottom:0;color:var(--purple)">I'm in MyÉcire anytime. I respond within 48 hours.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p class="p footer-msg">This is a guide to help build a better system to support you. You said you want less noise about your body. We're going to quiet it — from the inside out.</p>
+    <p class="p footer-motto">You don't have to be perfect. You have to keep going.</p>
+    <p class="p footer-sig">— Dr. Hammond · Écire Health™</p>
+  </div>
+</div>
+
+<script>
+// ═══════ DATA ═══════
+const proteins = [
+  { name:"Chicken breast", emoji:"🍗", amount43:"5 oz (1.5 palm-sized pieces)", tip:"Sliced, shredded, or cubed — however you cooked it" },
+  { name:"Chicken thigh (boneless)", emoji:"🍗", amount43:"6 oz", tip:"More flavourful than breast — forgiving when reheated" },
+  { name:"Salmon", emoji:"🐟", amount43:"7.5 oz", tip:"Also delivers your omega-3 — double duty" },
+  { name:"Ground turkey (93%)", emoji:"🥘", amount43:"7 oz (~1 cup cooked)", tip:"From Sunday batch — already seasoned" },
+  { name:"Eggs", emoji:"🥚", amount43:"3 eggs + yogurt + hemp hearts = 45g", tip:"Best combined — 3 eggs get you halfway, yogurt finishes it" },
+  { name:"Tilapia / white fish", emoji:"🐟", amount43:"6 oz", tip:"Light, mild — pairs with any sauce you already use" },
+  { name:"Beef (lean)", emoji:"🥩", amount43:"6 oz", tip:"Stew beef, grilled, or in soup — the same portion" },
+  { name:"Shrimp / prawns", emoji:"🦐", amount43:"6.5 oz (~15 large)", tip:"Quick — 3 minutes in a hot pan" },
+  { name:"Greek yogurt (plain)", emoji:"🥛", amount43:"1 cup + eggs or hemp hearts", tip:"Best combined — 1 cup gets you halfway (20g)" },
+  { name:"Cottage cheese", emoji:"🧀", amount43:"1.75 cups (or 1 cup + protein scoop)", tip:"Slow-release casein — hours of fullness" },
+];
+const starches = [
+  { name:"Sweet potato / yam", emoji:"🍠", portion:"1 medium or 1 cup cubed", note:"Roasted from Sunday batch" },
+  { name:"Plantain (baked)", emoji:"🍌", portion:"1 ripe plantain", note:"Golden, caramelized" },
+  { name:"Brown rice / basmati", emoji:"🍚", portion:"¾ cup cooked", note:"From the batch in your fridge" },
+  { name:"Pumpkin / butternut", emoji:"🎃", portion:"1 cup cubed", note:"Roasted — the caramelized edges" },
+  { name:"Whole grain toast", emoji:"🍞", portion:"1–2 slices", note:"Especially for breakfast with eggs" },
+  { name:"Oatmeal", emoji:"🥣", portion:"½ cup dry (1 cup cooked)", note:"Add protein powder or hemp hearts" },
+];
+const vegetables = [
+  { name:"Roasted mixed veg", emoji:"🥦", portion:"1–2 cups", note:"From Sunday tray — peppers, onion, zucchini" },
+  { name:"Fresh side salad", emoji:"🥗", portion:"1–2 cups mixed greens", note:"A handful of greens alongside any meal adds fibre and volume" },
+  { name:"Spinach / greens", emoji:"🥬", portion:"2 cups fresh or 1 cup cooked", note:"Sautéed, wilted, or fresh" },
+  { name:"Tomato & onion", emoji:"🍅", portion:"1 cup chopped", note:"Fresh alongside or in a stew" },
+  { name:"Broccoli", emoji:"🥦", portion:"1 cup", note:"Roasted or steamed" },
+  { name:"Green beans", emoji:"🫘", portion:"1 cup", note:"Sautéed with garlic" },
+  { name:"Colourful salad", emoji:"🥗", portion:"2 cups mixed greens + colour", note:"Tomatoes, cucumber, peppers, red onion — the more colour, the more phytonutrients" },
+];
+const fats = [
+  { name:"Avocado", emoji:"🥑", portion:"½ avocado", note:"Sliced alongside" },
+  { name:"Olive oil", emoji:"🫒", portion:"1 tbsp", note:"Drizzled or for cooking" },
+  { name:"Cashews / almonds", emoji:"🥜", portion:"Small handful (~15)", note:"The crunch you love" },
+  { name:"Peanut butter", emoji:"🥜", portion:"1 tbsp", note:"In smoothies, on toast, or sauces" },
+  { name:"Hemp hearts", emoji:"🌱", portion:"2 tbsp", note:"Magic Stardust — also adds 7g protein" },
+];
+
+const recipes = {
+  breakfast: [
+    { id:"b1", title:"Spiced Egg & Avocado Bowl", subtitle:"A warm, satisfying way to start the day", protein:"~44g", time:"12 min", ingredients:["3 large eggs","½ avocado, sliced","1 cup Greek yogurt","1 tbsp hemp hearts","½ tsp smoked paprika, ¼ tsp garlic powder","Pinch of cayenne, salt, pepper","Tomato slices or spinach"], steps:["Warm skillet with olive oil.","Whisk eggs with spices.","Pour, fold gently, cook until just set.","Bowl: eggs, avocado, tomato, dollop of yogurt.","Sprinkle hemp hearts."], tip:"The yogurt and hemp hearts bring it to 44g. A warm, complete breakfast." },
+    { id:"b2", title:"Overnight Protein Smoothie", subtitle:"Your car-breakfast — 2 min the night before", protein:"~42g", time:"2 min", ingredients:["1.5 scoops protein powder","1 cup milk","1 tbsp peanut butter","1 banana or ½ cup berries","2 tbsp Magic Stardust","½ cup ice, pinch of cinnamon"], steps:["Blend 30 seconds. Pour into travel cup. Fridge.","Morning: grab, shake, go."], tip:"The chia thickens it overnight and extends satiety." },
+    { id:"b3", title:"Nigerian-Inspired Egg Stew", subtitle:"Warm, spiced, deeply satisfying", protein:"~40g", time:"15 min", ingredients:["3 eggs","2 tbsp tomato paste","½ onion, 1 tomato","½ tsp crayfish (or paprika)","Curry powder, thyme, scotch bonnet","1 tbsp oil, 2 slices toast","1 cup Greek yogurt on side"], steps:["Sauté onion 2 min.","Add tomato paste, stir 1 min.","Add tomato, spices. Simmer 3–4 min.","Crack eggs in. Cook until just set.","Over toast. Yogurt alongside."], tip:"This is home. The yogurt as a cool contrast to the heat." },
+  ],
+  lunch: [
+    { id:"l1", title:"Warm Chicken Bowl", subtitle:"5 min with Sunday batch chicken", protein:"~45g", time:"5 min", ingredients:["6 oz chicken (Sunday batch)","1 cup roasted veg (Sunday tray)","2 cups greens","2 tbsp hemp hearts, lemon"], steps:["Warm chicken and veg.","Greens, warm toppings, lemon, hemp hearts."], tip:"Sunday prep makes this a 5-minute assembly." },
+    { id:"l2", title:"Salmon Bowl with Sweet Potato", subtitle:"Omega-3 and protein in one", protein:"~43g", time:"20 min", ingredients:["7 oz salmon","1 sweet potato, cubed","2 cups spinach","Paprika, cumin, lime, Magic Stardust"], steps:["Roast sweet potato 400°F 15 min.","Add salmon, roast 12–14 min.","Spinach, salmon, sweet potato, lime, stardust."], tip:"Salmon days = double duty. Protein and omega-3." },
+    { id:"l3", title:"Turkey Lettuce Wraps", subtitle:"Light, crunchy, filling", protein:"~41g", time:"15 min", ingredients:["7 oz ground turkey","Lettuce leaves, carrots, cucumber, green onion","Soy sauce, sesame oil, ginger, garlic","Peanut drizzle: PB + soy + lime + water"], steps:["Brown turkey with garlic, ginger, soy, sesame.","Spoon into lettuce. Top with carrots, cucumber.","Peanut drizzle."], tip:"The crunch you love — make turkey ahead, assemble fresh." },
+  ],
+  dinner: [
+    { id:"d1", title:"Suya-Spiced Chicken Thighs", subtitle:"Bold, West African-inspired", protein:"~46g", time:"30 min", ingredients:["2 bone-in chicken thighs","Suya spice: ground peanuts, paprika, onion, garlic, ginger, cayenne","Oil, mixed vegetables, fresh onion, tomato, lime"], steps:["Rub suya spice into chicken.","Sear skin-down 5 min. Flip.","Add veg. Oven 400°F 18–20 min.","Fresh onion, tomato, lime."], tip:"Make extra — leftovers over a bed of fresh greens become tomorrow's lunch. Suya spice keeps in a jar for weeks." },
+    { id:"d2", title:"Lemon-Herb Baked Salmon", subtitle:"Simple, elegant, 20 min", protein:"~44g", time:"20 min", ingredients:["7 oz salmon","Olive oil, lemon, garlic, dill, paprika","4 cups spinach, butter"], steps:["Season salmon. Bake 400°F 14–16 min.","Sauté garlic in butter, wilt spinach.","Salmon on spinach. Lemon."], tip:"Leftovers flake into tomorrow's salad." },
+    { id:"d3", title:"Nigerian Pepper Soup", subtitle:"Warming, healing, deeply nourishing", protein:"~43g", time:"35 min", ingredients:["8 oz bone-in chicken","Onion, garlic, ginger, scotch bonnet","Ground crayfish, uziza (or black pepper + allspice)","Calabash nutmeg (or nutmeg), water/broth","Scent leaves or basil"], steps:["Simmer chicken with onion, garlic, ginger 15 min.","Remove chicken. Add spices. Simmer 10 min.","Return chicken. 5 more min. Garnish."], tip:"Pepper soup is medicine in many West African traditions — and it genuinely is. This is nourishment that feels like home." },
+  ],
+  latenight: [
+    { id:"n1", title:"Hard-Boiled Eggs with Pepper Sauce", subtitle:"No cooking at midnight", protein:"~30g", time:"Sunday prep", ingredients:["Eggs (batch boiled Sunday)","Pepper sauce: tomatoes, scotch bonnet, onion, tomato paste, oil"], steps:["Sunday: boil 10–12 eggs. Store.","Pepper sauce: blend, sauté, simmer 10 min. Store in jar.","11pm: eggs + sauce. Done."], tip:"Sauce keeps a full week. Works on everything." },
+    { id:"n2", title:"Cottage Cheese & Cashews", subtitle:"Creamy, crunchy, 1 min", protein:"~32g", time:"1 min", ingredients:["1 cup cottage cheese","Handful of cashews","Optional honey drizzle, cinnamon"], steps:["Scoop. Top. The cashews give you the crunch you love."], tip:"Slow-release casein keeps you satisfied through your work session." },
+  ]
+};
+
+const workouts = [
+  { id:"A", title:"Option A: Bodyweight at Home", meta:"No equipment · 20 min", desc:"While kids do homework, before scroll time, or morning.", exercises:[["Bodyweight squats","3 × 10"],["Modified push-ups","3 × 8"],["Reverse lunges","3 × 8 each"],["Glute bridges","3 × 12"],["Plank hold","3 × 20 sec"],["Wall sit","3 × 20 sec"]] },
+  { id:"B", title:"Option B: Dumbbells at Home", meta:"One pair (8–15 lbs) · 25 min", desc:"Target or Amazon, $15–30.", exercises:[["Goblet squats","3 × 10"],["Dumbbell rows","3 × 10 each"],["Dumbbell deadlifts","3 × 10"],["Overhead press","3 × 8"],["Lunges with dumbbells","3 × 8 each"],["Plank hold","3 × 30 sec"]] },
+  { id:"C", title:"Option C: At the Gym", meta:"Machines · 30 min · Beginner-friendly", desc:"Machines guide your movement. Staff can help.", exercises:[["Leg press","3 × 12"],["Lat pulldown","3 × 10"],["Chest press","3 × 10"],["Seated row","3 × 10"],["Leg curl","3 × 12"],["Plank hold","3 × 30 sec"]] },
+];
+
+const questions = [
+  { q:"When can you do resistance training this week?", c:"Two sessions, 20 min. Your actual week — morning, evening, lunch break?" },
+  { q:"Where would you do it?", c:"Living room? Gym? No wrong answer." },
+  { q:"Would it help to have someone with you?", c:"Workout buddy? YouTube video? Trainer for first session? We're designing for what gets you to show up." },
+  { q:"What does breakfast look like tomorrow?", c:"Not next week. Tomorrow. Could you blend a smoothie tonight? Or put together a quick plate with eggs and yogurt?" },
+  { q:"What's in your pantry for late nights?", c:"If hard-boiled eggs with pepper sauce, cottage cheese, or yogurt were already in the fridge — the midnight choice changes without effort." },
+  { q:"How confident are you (1–10) for each strategy?", c:"If anything is below a 7, it means we haven't solved the friction yet. That's my job, not yours." },
+];
+
+// ═══════ STATE ═══════
+let state = { selP: null, selS: null, selV: null, selF: null, openRecipe: null, openWorkout: null };
+
+// ═══════ TABS ═══════
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ═══════ PLATE PICKER ═══════
+function renderPicker(containerId, items, stateKey, isProtein) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = items.map((item, i) => {
+    const sel = state[stateKey] && state[stateKey].name === item.name;
+    return `<div class="picker-item ${sel ? 'selected' : ''}" onclick="togglePick('${stateKey}', ${i}, '${containerId}', ${isProtein})">
+      <div class="picker-row">
+        <div class="picker-name"><span class="picker-emoji">${item.emoji}</span><span class="picker-label">${item.name}</span></div>
+        ${sel ? '<span class="picker-check">✓</span>' : ''}
+      </div>
+      ${sel ? `<div class="picker-detail">
+        <div class="picker-amount">${item.amount43 || item.portion}</div>
+        <div class="picker-tip">${item.tip || item.note}</div>
+      </div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+const pickerData = { proteinPicker: proteins, starchPicker: starches, vegPicker: vegetables, fatPicker: fats };
+const pickerKeys = { proteinPicker: 'selP', starchPicker: 'selS', vegPicker: 'selV', fatPicker: 'selF' };
+
+function togglePick(stateKey, idx, containerId, isProtein) {
+  const items = pickerData[containerId];
+  if (state[stateKey] && state[stateKey].name === items[idx].name) {
+    state[stateKey] = null;
+  } else {
+    state[stateKey] = items[idx];
+  }
+  renderPicker(containerId, items, stateKey, isProtein);
+  renderPlateSummary();
+}
+
+function renderPlateSummary() {
+  const box = document.getElementById('plateSummary');
+  const rows = document.getElementById('plateRows');
+  const footer = document.getElementById('plateFooter');
+  const hasAny = state.selP || state.selS || state.selV || state.selF;
+  box.classList.toggle('visible', !!hasAny);
+  if (!hasAny) return;
+  let html = '';
+  if (state.selP) html += `<div class="plate-row"><span class="plate-row-name">${state.selP.emoji} ${state.selP.name}</span><span style="font-size:13px;color:var(--sage);font-family:'DM Sans',system-ui,sans-serif">${state.selP.amount43}</span></div>`;
+  if (state.selS) html += `<div class="plate-row"><span class="plate-row-name">${state.selS.emoji} ${state.selS.name}</span><span style="font-size:13px;color:var(--amber);font-family:'DM Sans',system-ui,sans-serif">${state.selS.portion}</span></div>`;
+  if (state.selV) html += `<div class="plate-row"><span class="plate-row-name">${state.selV.emoji} ${state.selV.name}</span><span style="font-size:13px;color:var(--sage);font-family:'DM Sans',system-ui,sans-serif">${state.selV.portion}</span></div>`;
+  if (state.selF) html += `<div class="plate-row"><span class="plate-row-name">${state.selF.emoji} ${state.selF.name}</span><span style="font-size:13px;color:var(--brown);font-family:'DM Sans',system-ui,sans-serif">${state.selF.portion}</span></div>`;
+  rows.innerHTML = html;
+  footer.textContent = (state.selP ? '~43g protein ✓  ·  ' : '') + 'balanced plate ✓  ·  protein first';
+}
+
+function clearPlate() {
+  state.selP = null; state.selS = null; state.selV = null; state.selF = null;
+  renderPicker('proteinPicker', proteins, 'selP', true);
+  renderPicker('starchPicker', starches, 'selS', false);
+  renderPicker('vegPicker', vegetables, 'selV', false);
+  renderPicker('fatPicker', fats, 'selF', false);
+  renderPlateSummary();
+}
+
+// ═══════ RECIPES ═══════
+function renderRecipes(containerId, items) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = items.map(r => {
+    const open = state.openRecipe === r.id;
+    return `<div class="accordion">
+      <div class="accordion-header" onclick="toggleRecipe('${r.id}')">
+        <div>
+          <div class="accordion-title">${r.title}</div>
+          <div class="accordion-sub">${r.subtitle}</div>
+          <div class="accordion-meta"><span class="meta-protein">${r.protein}</span><span class="meta-time">⏱ ${r.time}</span></div>
+        </div>
+        <span class="accordion-arrow ${open ? 'open' : ''}">▼</span>
+      </div>
+      <div class="accordion-body ${open ? 'open' : ''}">
+        <div class="ingredient-label">Ingredients</div>
+        ${r.ingredients.map((ing,i) => `<div class="ingredient-item">${ing}</div>`).join('')}
+        <div class="steps-label">How to Make It</div>
+        ${r.steps.map((s,i) => `<div class="step-item"><span class="step-num">${i+1}.</span> ${s}</div>`).join('')}
+        ${r.tip ? `<div class="tip-box">💡 ${r.tip}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleRecipe(id) {
+  state.openRecipe = state.openRecipe === id ? null : id;
+  renderAllRecipes();
+}
+
+function renderAllRecipes() {
+  renderRecipes('recipes-breakfast', recipes.breakfast);
+  renderRecipes('recipes-lunch', recipes.lunch);
+  renderRecipes('recipes-dinner', recipes.dinner);
+  renderRecipes('recipes-latenight', recipes.latenight);
+}
+
+// ═══════ PROTEIN REFERENCE ═══════
+function renderProteinCards() {
+  document.getElementById('proteinCards').innerHTML = proteins.map(p =>
+    `<div class="protein-card"><div class="protein-card-name"><span style="font-size:18px">${p.emoji}</span><span style="font-size:14px;color:var(--navy)">${p.name}</span></div><span class="protein-card-amount">${p.amount43}</span></div>`
+  ).join('');
+}
+
+// ═══════ WORKOUTS ═══════
+function renderWorkouts() {
+  document.getElementById('workouts').innerHTML = workouts.map(w => {
+    const open = state.openWorkout === w.id;
+    return `<div class="accordion">
+      <div class="accordion-header" onclick="toggleWorkout('${w.id}')">
+        <div>
+          <div class="accordion-title">${w.title}</div>
+          <div class="workout-meta">${w.meta}</div>
+        </div>
+        <span class="accordion-arrow ${open ? 'open' : ''}">▼</span>
+      </div>
+      <div class="accordion-body ${open ? 'open' : ''}">
+        <p class="p" style="font-size:13px">${w.desc}</p>
+        ${w.exercises.map(([n,d]) => `<div class="exercise-row"><span class="exercise-name">${n}</span><span class="exercise-detail">${d}</span></div>`).join('')}
+        <p class="p rest-note">Rest 30–60 sec between sets. Too hard → fewer reps. Not challenging → go slower (3 sec down, 1 sec up).</p>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleWorkout(id) {
+  state.openWorkout = state.openWorkout === id ? null : id;
+  renderWorkouts();
+}
+
+// ═══════ QUESTIONS ═══════
+function renderQuestions() {
+  document.getElementById('questionCards').innerHTML = questions.map((item, i) =>
+    `<div class="q-card"><div class="q-num">${i+1}</div><div><div class="q-text">${item.q}</div><div class="q-context">${item.c}</div></div></div>`
+  ).join('');
+}
+
+// ═══════ INIT ═══════
+renderPicker('proteinPicker', proteins, 'selP', true);
+renderPicker('starchPicker', starches, 'selS', false);
+renderPicker('vegPicker', vegetables, 'selV', false);
+renderPicker('fatPicker', fats, 'selF', false);
+renderAllRecipes();
+renderProteinCards();
+renderWorkouts();
+renderQuestions();
+
+// ═══════ PASSWORD GATE ═══════
+// CHANGE THIS CODE to whatever you want Ronke to enter:
+const ACCESS_CODE = "ecire2026";
+
+function checkCode() {
+  const input = document.getElementById('gateInput');
+  const error = document.getElementById('gateError');
+  if (input.value.trim().toLowerCase() === ACCESS_CODE.toLowerCase()) {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('mainContent').classList.remove('hidden');
+    window.scrollTo(0, 0);
+  } else {
+    input.classList.add('error');
+    error.textContent = 'That code didn\u2019t match. Check the message from Dr. Hammond.';
+    setTimeout(() => input.classList.remove('error'), 400);
+  }
+}
+document.getElementById('gateInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') checkCode();
+});
+</script>
+</body>
+</html>
