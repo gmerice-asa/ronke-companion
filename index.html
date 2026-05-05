@@ -5,633 +5,388 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Your Companion Guide · Écire Health™</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
+    --bg: #F7F4F0;
+    --card: #FFFFFF;
+    --input: #EDE8E3;
+    --border: rgba(123,94,167,0.10);
+    --border-hover: rgba(123,94,167,0.18);
+    --text: #0B1B3A;
+    --text-soft: #1E2D4A;
+    --text-dim: #5C6A7F;
+    --text-muted: #8A9AAE;
+    --heading: #0B1B3A;
+    --ecire: #7B5EA7;
+    --ecire-bright: #7B5EA7;
+    --ecire-deep: #9B7EC8;
+    --ecire-soft: #B8A0D8;
+    --hit: #3D8B5E;
+    --hit-dim: rgba(61,139,94,0.10);
+    --amber: #C4872E;
+    --blue: #3A6FA8;
+    --pink: #C04870;
+    --red: #C04848;
+    --radius: 4px;
+    /* Backward-compatible aliases */
     --navy: #0B1B3A;
-    --gold: #D4AF64;
     --purple: #7B5EA7;
     --sage: #3D8B5E;
-    --amber: #9A7420;
-    --text: #4A4260;
-    --muted: #7A7590;
+    --gold: #D4AF64;
+    --muted: #8A9AAE;
     --cream: #F7F4F0;
-    --warm-white: #FFFFF8;
-    --border: #E8E4DF;
-    --light-bg: #F9F7F4;
-    --red: #C04848;
-    --brown: #B07520;
+    --warm-white: #FFFFFF;
+    --brown: #C4872E;
+    --light-bg: #F3F0EC;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04);
+    --callout: #3A3040;
   }
 
   body {
-    font-family: 'Playfair Display', Georgia, serif;
-    background: var(--cream);
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
     color: var(--text);
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
+    font-weight: 300;
   }
 
-  .container {
-    max-width: 480px;
-    margin: 0 auto;
-    background: var(--cream);
-    min-height: 100vh;
-  }
+  .container { max-width: 560px; margin: 0 auto; background: var(--bg); min-height: 100vh; }
 
-  /* Header */
+  /* ═══ HEADER ═══ */
   .header {
-    background: linear-gradient(135deg, var(--navy) 0%, #1a2a4a 100%);
-    padding: 32px 24px 24px;
-    color: #EDE8E0;
-  }
-  .header-label {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 10px;
-    color: var(--gold);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .header-title {
-    font-size: 24px;
-    font-weight: 400;
-    margin-bottom: 6px;
-  }
-  .header-sub {
-    font-size: 14px;
-    color: #B8B0A4;
-    font-style: italic;
-    line-height: 1.6;
-  }
-
-  /* Banner */
-  .banner {
-    background: var(--warm-white);
-    padding: 14px 24px;
+    background: var(--card);
+    padding: 32px 24px 28px;
     border-bottom: 1px solid var(--border);
     text-align: center;
-    font-size: 14px;
-    color: var(--sage);
-    font-style: italic;
-    line-height: 1.6;
+  }
+  .header-brand {
+    display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 16px;
+  }
+  .header-brand span {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px; font-weight: 300; letter-spacing: 5px; color: var(--heading); opacity: 0.85;
+  }
+  .header-label {
+    font-size: 9px; color: var(--ecire); letter-spacing: 3px; text-transform: uppercase; font-weight: 500; margin-bottom: 8px;
+  }
+  .header-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px; font-weight: 300; color: var(--heading); margin-bottom: 8px; letter-spacing: 0.3px;
+  }
+  .header-sub {
+    font-size: 13px; color: var(--text-dim); line-height: 1.8; max-width: 420px; margin: 0 auto;
   }
 
-  /* Tabs */
+  /* ═══ BANNER ═══ */
+  .banner {
+    background: var(--ecire); background: linear-gradient(135deg, var(--ecire), var(--ecire-deep));
+    padding: 14px 24px; text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 14px; color: #fff; font-weight: 400; letter-spacing: 0.3px; line-height: 1.6;
+  }
+
+  /* ═══ TABS ═══ */
   .tab-bar {
-    display: flex;
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    display: flex; background: var(--card); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; box-shadow: var(--shadow);
   }
   .tab-bar::-webkit-scrollbar { display: none; }
   .tab-btn {
-    flex: 0 0 auto;
-    padding: 10px 8px 8px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    color: var(--muted);
-    font-size: 10px;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    min-width: 54px;
-    transition: color 0.2s, border-color 0.2s;
+    flex: 0 0 auto; padding: 12px 8px 10px; border: none; background: none; cursor: pointer;
+    border-bottom: 2px solid transparent; color: var(--text-muted);
+    font-size: 9px; font-family: 'DM Sans', sans-serif; letter-spacing: 1px;
+    display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 56px;
+    transition: color 0.2s, border-color 0.2s; text-transform: uppercase;
   }
-  .tab-btn.active {
-    border-bottom-color: var(--purple);
-    color: var(--purple);
-  }
+  .tab-btn.active { border-bottom-color: var(--ecire); color: var(--ecire); }
   .tab-icon { font-size: 15px; }
 
-  /* Content */
-  .content { padding: 16px 16px 40px; }
+  /* ═══ CONTENT ═══ */
+  .content { padding: 20px 18px 40px; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* Typography */
-  .p {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.8;
-    margin-bottom: 12px;
-  }
+  /* ═══ TYPOGRAPHY ═══ */
+  .p { font-size: 13px; color: var(--text-dim); line-height: 1.9; margin-bottom: 12px; }
   .section-title {
-    font-size: 18px;
-    color: var(--navy);
-    margin-bottom: 4px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.15rem; color: var(--heading); font-weight: 400; letter-spacing: 0.3px; margin-bottom: 6px;
   }
   .section-label {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 10px;
-    color: var(--amber);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-top: 24px;
-    margin-bottom: 8px;
+    font-size: 9px; color: var(--ecire); letter-spacing: 2.5px; text-transform: uppercase;
+    font-weight: 500; margin-top: 28px; margin-bottom: 10px;
   }
   .science-box {
-    background: var(--light-bg);
-    border-left: 3px solid var(--purple);
-    padding: 10px 14px;
-    margin: 10px 0;
-    border-radius: 0 6px 6px 0;
-    font-size: 13px;
-    color: var(--text);
-    font-style: italic;
-    line-height: 1.75;
+    background: var(--ecire); background: linear-gradient(135deg, rgba(123,94,167,0.06), rgba(155,126,200,0.04));
+    border-left: 3px solid var(--ecire);
+    padding: 14px 16px; margin: 12px 0; border-radius: var(--radius);
+    font-size: 12px; color: var(--text-dim); font-style: italic; line-height: 1.85;
   }
 
-  /* Strategy Cards */
-  .strategy-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 10px;
+  /* ═══ STRATEGY CARDS (REDESIGNED) ═══ */
+  .strat-section-divider {
+    display: flex; align-items: center; gap: 12px; margin: 28px 0 16px;
   }
-  .strategy-badge {
-    display: inline-block;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 10px;
-    color: #fff;
-    padding: 2px 8px;
-    border-radius: 4px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
+  .strat-section-divider .line { flex: 1; height: 1px; }
+  .strat-section-divider .label {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; white-space: nowrap;
+  }
+  .strategy-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); margin-bottom: 10px; overflow: hidden; transition: all 0.3s;
+    cursor: pointer;
+  }
+  .strategy-card:hover { border-color: var(--border-hover); }
+  .strategy-header {
+    padding: 18px 18px; display: flex; align-items: flex-start; gap: 14px;
+  }
+  .strategy-num {
+    width: 32px; height: 32px; border-radius: var(--radius);
+    background: transparent; border: 1.5px solid;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    font-family: 'Cormorant Garamond', Georgia, serif; font-size: 14px; font-weight: 300;
+  }
+  .strategy-content { flex: 1; }
+  .strategy-tag {
+    font-size: 8px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; margin-bottom: 4px;
   }
   .strategy-what {
-    font-size: 15px;
-    color: var(--navy);
-    font-weight: 500;
-    margin-bottom: 6px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px; color: var(--heading); font-weight: 500; letter-spacing: 0.2px; line-height: 1.4;
+  }
+  .strategy-arrow {
+    color: var(--text-muted); font-size: 11px; margin-top: 4px; flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .strategy-arrow.open { transform: rotate(180deg); }
+  .strategy-detail {
+    display: none; padding: 0 18px 18px; border-top: 1px solid var(--border);
+  }
+  .strategy-detail.open { display: block; }
+  .strategy-detail-label {
+    font-size: 8px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+    color: var(--ecire); margin: 14px 0 8px;
   }
   .strategy-why {
-    font-size: 13px;
-    color: var(--purple);
-    font-style: italic;
-    line-height: 1.7;
-    margin-bottom: 8px;
+    font-size: 12.5px; color: var(--callout); line-height: 1.9; font-style: italic;
+    padding: 12px 14px; border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(123,94,167,0.05), rgba(155,126,200,0.03));
+    border-left: 2px solid var(--ecire-soft);
   }
   .strategy-how {
-    font-size: 13px;
-    color: var(--text);
-    line-height: 1.75;
+    font-size: 12.5px; color: var(--text-dim); line-height: 1.9; margin-top: 10px;
   }
 
-  /* Plate Picker */
-  .picker-item {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 14px;
-    margin-bottom: 6px;
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
-  }
-  .picker-item.selected {
-    background: #F3EEFF;
-    border-color: var(--purple);
-  }
-  .picker-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .picker-name {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .picker-emoji { font-size: 18px; }
-  .picker-label { font-size: 14px; color: var(--navy); }
-  .picker-item.selected .picker-label { font-weight: 500; }
-  .picker-check { color: var(--purple); font-size: 16px; }
-  .picker-detail {
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid var(--border);
-  }
-  .picker-amount { font-size: 13px; color: var(--sage); font-weight: 500; font-family: 'DM Sans', system-ui, sans-serif; }
-  .picker-tip { font-size: 12px; color: var(--muted); margin-top: 2px; font-style: italic; }
-
-  /* Plate Summary */
-  .plate-summary {
-    background: #fff;
-    border: 2px solid var(--purple);
-    border-radius: 12px;
-    padding: 18px;
-    margin-top: 24px;
-    display: none;
-  }
-  .plate-summary.visible { display: block; }
-  .plate-summary-label {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 10px;
-    color: var(--purple);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .plate-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 6px 0;
-    border-bottom: 1px solid #F0EDE8;
-    font-size: 14px;
-  }
-  .plate-row:last-of-type { border-bottom: none; }
-  .plate-row-name { color: var(--navy); }
-  .plate-footer {
-    margin-top: 12px;
-    text-align: center;
-    font-size: 13px;
-    color: var(--purple);
-    font-style: italic;
-  }
-  .clear-btn {
-    margin-top: 12px;
-    width: 100%;
-    padding: 8px;
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 11px;
-    color: var(--muted);
-  }
-
-  /* Recipe / Workout Accordion */
-  .accordion {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    margin-bottom: 10px;
-    overflow: hidden;
-  }
-  .accordion-header {
-    padding: 14px 16px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .accordion-title { font-size: 15px; color: var(--navy); font-weight: 500; }
-  .accordion-sub { font-size: 12px; color: var(--text); margin-top: 2px; }
-  .accordion-meta {
-    display: flex;
-    gap: 12px;
-    margin-top: 4px;
-  }
-  .accordion-meta span {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 11px;
-  }
-  .meta-protein { color: var(--sage); }
-  .meta-time { color: var(--amber); }
-  .accordion-arrow {
-    color: var(--muted);
-    transition: transform 0.2s;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-  .accordion-arrow.open { transform: rotate(180deg); }
-  .accordion-body {
-    padding: 0 16px 16px;
-    border-top: 1px solid #F0EDE8;
-    display: none;
-  }
-  .accordion-body.open { display: block; }
-  .ingredient-label, .steps-label {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 10px;
-    color: var(--amber);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-top: 12px;
-    margin-bottom: 6px;
-  }
-  .ingredient-item {
-    font-size: 13px;
-    color: var(--text);
-    padding: 3px 0;
-    border-bottom: 1px solid #F5F3F0;
-  }
-  .ingredient-item:last-child { border-bottom: none; }
-  .step-item {
-    font-size: 13px;
-    color: var(--text);
-    padding: 6px 0;
-    line-height: 1.7;
-  }
-  .step-num { color: var(--purple); font-weight: 600; }
-  .tip-box {
-    background: var(--light-bg);
-    border-radius: 6px;
-    padding: 10px 12px;
-    margin-top: 12px;
-    font-size: 12px;
-    color: var(--purple);
-    font-style: italic;
-    line-height: 1.7;
-  }
-
-  /* Exercise rows */
-  .exercise-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #F0EDE8;
-    font-size: 14px;
-  }
-  .exercise-name { color: var(--navy); }
-  .exercise-detail { color: var(--muted); font-family: 'DM Sans', system-ui, sans-serif; font-size: 13px; }
-
-  /* Protein cards */
-  .protein-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 6px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .protein-card-name {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .protein-card-amount {
-    font-size: 13px;
-    color: var(--sage);
-    font-family: 'DM Sans', system-ui, sans-serif;
-  }
-
-  /* Walking cards */
-  .walk-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 8px;
-  }
-  .walk-title { font-size: 15px; color: var(--navy); font-weight: 500; }
-  .walk-body { margin-top: 6px; font-size: 14px; color: var(--text); line-height: 1.8; }
-
-  /* Question cards */
-  .q-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 8px;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .q-num {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--purple);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 600;
-    flex-shrink: 0;
-    margin-top: 2px;
-    font-family: 'DM Sans', system-ui, sans-serif;
-  }
-  .q-text { font-size: 15px; color: var(--navy); font-weight: 500; }
-  .q-context { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 4px; line-height: 1.7; }
-
-  /* Special boxes */
+  /* ═══ FOLD-IN / NOT-DOING ═══ */
   .fold-in-box {
-    margin-top: 20px;
-    padding: 12px 16px;
-    background: #fff;
-    border-radius: 10px;
-    border: 1px dashed #B8B0A4;
+    margin-top: 24px; padding: 18px 18px; background: var(--card);
+    border-radius: var(--radius); border: 1px dashed var(--ecire-soft);
+    box-shadow: var(--shadow);
   }
   .fold-in-label {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
+    font-size: 9px; color: var(--ecire); letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 500; margin-bottom: 10px;
+  }
+  .fold-in-item {
+    display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px;
+    font-size: 13px; color: var(--text-dim); line-height: 1.8;
+  }
+  .fold-in-dot {
+    width: 4px; height: 4px; border-radius: 50%; background: var(--ecire-soft);
+    flex-shrink: 0; margin-top: 8px;
   }
   .not-doing-box {
-    margin-top: 20px;
-    padding: 14px 16px;
-    background: rgba(192,72,72,0.04);
-    border-radius: 10px;
-    border: 1px solid rgba(192,72,72,0.15);
+    margin-top: 16px; padding: 18px 18px; background: var(--card);
+    border-radius: var(--radius); border: 1px solid rgba(192,72,72,0.12);
+    border-left: 3px solid rgba(192,72,72,0.25); box-shadow: var(--shadow);
   }
   .not-doing-label {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 10px;
-    color: var(--red);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
+    font-size: 9px; color: var(--red); letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 500; margin-bottom: 8px;
   }
+
+  /* ═══ PLATE PICKER ═══ */
+  .picker-item {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 10px 14px; margin-bottom: 6px; cursor: pointer; transition: all 0.15s;
+    box-shadow: var(--shadow);
+  }
+  .picker-item.selected { background: rgba(123,94,167,0.06); border-color: var(--ecire); }
+  .picker-row { display: flex; justify-content: space-between; align-items: center; }
+  .picker-name { display: flex; align-items: center; gap: 8px; }
+  .picker-emoji { font-size: 18px; }
+  .picker-label { font-size: 13px; color: var(--heading); }
+  .picker-item.selected .picker-label { font-weight: 500; }
+  .picker-check { color: var(--ecire); font-size: 16px; }
+  .picker-detail { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+  .picker-amount { font-size: 12px; color: var(--hit); font-weight: 500; }
+  .picker-tip { font-size: 11px; color: var(--text-muted); margin-top: 2px; font-style: italic; }
+
+  /* ═══ PLATE SUMMARY ═══ */
+  .plate-summary {
+    background: var(--card); border: 2px solid var(--ecire); border-radius: var(--radius);
+    padding: 18px; margin-top: 24px; display: none; box-shadow: var(--shadow);
+  }
+  .plate-summary.visible { display: block; }
+  .plate-summary-label { font-size: 9px; color: var(--ecire); letter-spacing: 2px; text-transform: uppercase; font-weight: 500; margin-bottom: 10px; }
+  .plate-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 13px; }
+  .plate-row:last-of-type { border-bottom: none; }
+  .plate-row-name { color: var(--heading); }
+  .plate-footer { margin-top: 12px; text-align: center; font-size: 12px; color: var(--ecire); font-style: italic; }
+  .clear-btn {
+    margin-top: 12px; width: 100%; padding: 8px; background: none;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    cursor: pointer; font-size: 10px; color: var(--text-muted); font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ═══ ACCORDION (Recipes / Workouts) ═══ */
+  .accordion {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    margin-bottom: 10px; overflow: hidden; box-shadow: var(--shadow);
+  }
+  .accordion-header {
+    padding: 14px 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  }
+  .accordion-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 15px; color: var(--heading); font-weight: 500; }
+  .accordion-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  .accordion-meta { display: flex; gap: 12px; margin-top: 4px; }
+  .accordion-meta span { font-size: 10px; }
+  .meta-protein { color: var(--hit); font-weight: 500; }
+  .meta-time { color: var(--amber); }
+  .accordion-arrow { color: var(--text-muted); transition: transform 0.2s; font-size: 11px; flex-shrink: 0; }
+  .accordion-arrow.open { transform: rotate(180deg); }
+  .accordion-body { padding: 0 16px 16px; border-top: 1px solid var(--border); display: none; }
+  .accordion-body.open { display: block; }
+  .ingredient-label, .steps-label {
+    font-size: 9px; color: var(--ecire); letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 500; margin-top: 14px; margin-bottom: 6px;
+  }
+  .ingredient-item { font-size: 12px; color: var(--text-dim); padding: 3px 0; border-bottom: 1px solid rgba(0,0,0,0.03); }
+  .ingredient-item:last-child { border-bottom: none; }
+  .step-item { font-size: 12px; color: var(--text-dim); padding: 5px 0; line-height: 1.8; }
+  .step-num { color: var(--ecire); font-weight: 600; }
+  .tip-box {
+    background: linear-gradient(135deg, rgba(123,94,167,0.05), rgba(155,126,200,0.03));
+    border-radius: var(--radius); padding: 10px 12px; margin-top: 12px;
+    font-size: 11px; color: var(--ecire); font-style: italic; line-height: 1.7;
+  }
+
+  /* ═══ EXERCISE / PROTEIN / WALK / Q CARDS ═══ */
+  .exercise-row {
+    display: flex; justify-content: space-between; padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 13px;
+  }
+  .exercise-name { color: var(--heading); }
+  .exercise-detail { color: var(--text-muted); font-size: 12px; }
+  .protein-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 12px 14px; margin-bottom: 6px; display: flex; justify-content: space-between;
+    align-items: center; box-shadow: var(--shadow);
+  }
+  .protein-card-name { display: flex; align-items: center; gap: 8px; }
+  .protein-card-amount { font-size: 12px; color: var(--hit); font-weight: 500; }
+  .walk-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px 18px; margin-bottom: 8px; box-shadow: var(--shadow);
+  }
+  .walk-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 15px; color: var(--heading); font-weight: 500; }
+  .walk-body { margin-top: 6px; font-size: 13px; color: var(--text-dim); line-height: 1.9; }
+  .q-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px 18px; margin-bottom: 8px; display: flex; gap: 12px; align-items: flex-start;
+    box-shadow: var(--shadow);
+  }
+  .q-num {
+    width: 24px; height: 24px; border-radius: var(--radius); background: var(--ecire);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600; flex-shrink: 0; margin-top: 2px;
+  }
+  .q-text { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 15px; color: var(--heading); font-weight: 500; }
+  .q-context { font-size: 12px; color: var(--text-muted); font-style: italic; margin-top: 4px; line-height: 1.7; }
+
+  /* ═══ MISC BOXES ═══ */
   .info-box {
-    background: var(--warm-white);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-top: 16px;
-    border: 1px solid var(--border);
+    background: var(--card); border-radius: var(--radius); padding: 16px 18px;
+    margin-top: 16px; border: 1px solid var(--border); box-shadow: var(--shadow);
   }
-  .expect-title {
-    font-size: 14px;
-    color: var(--navy);
-    font-weight: 500;
-    margin-bottom: 6px;
-  }
-  .center-text { text-align: center; }
-  .rest-note {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 10px;
-    margin-bottom: 0;
-  }
-
-  /* Prep section */
+  .expect-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 14px; color: var(--heading); font-weight: 500; margin-bottom: 6px; }
+  .rest-note { font-size: 11px; color: var(--text-muted); margin-top: 10px; margin-bottom: 0; }
   .prep-group {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 8px;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px 18px; margin-bottom: 8px; box-shadow: var(--shadow);
   }
-  .prep-title { font-size: 14px; color: var(--navy); font-weight: 500; margin-bottom: 8px; }
-  .prep-item { font-size: 13px; margin-bottom: 4px; line-height: 1.8; }
-
-  /* Shopping list */
+  .prep-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 14px; color: var(--heading); font-weight: 500; margin-bottom: 8px; }
+  .prep-item { font-size: 12px; margin-bottom: 4px; line-height: 1.8; color: var(--text-dim); }
   .shop-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 6px;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 12px 14px; margin-bottom: 6px; box-shadow: var(--shadow);
   }
-  .shop-cat {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 10px;
-    color: var(--amber);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .shop-items { font-size: 13px; color: var(--text); line-height: 1.8; }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 20px 16px 30px;
-    border-top: 1px solid var(--border);
-  }
-  .footer-msg { font-style: italic; margin-bottom: 8px; }
-  .footer-motto { color: var(--amber); margin-bottom: 4px; }
-  .footer-sig { color: var(--muted); font-size: 12px; }
-
+  .shop-cat { font-size: 9px; color: var(--ecire); letter-spacing: 2px; text-transform: uppercase; font-weight: 500; margin-bottom: 4px; }
+  .shop-items { font-size: 12px; color: var(--text-dim); line-height: 1.8; }
   .assembly-line {
-    text-align: center;
-    padding: 14px;
-    font-size: 14px;
-    color: var(--sage);
-    font-weight: 500;
+    text-align: center; padding: 16px; font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 14px; color: var(--hit); font-weight: 500; letter-spacing: 0.3px;
   }
-  .fold-note {
-    text-align: center;
-    padding: 16px;
-    font-size: 13px;
-    color: var(--sage);
-    font-style: italic;
-  }
+  .fold-note { text-align: center; padding: 16px; font-size: 12px; color: var(--hit); font-style: italic; }
   .app-note {
-    background: var(--warm-white);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-top: 20px;
-    border: 1px solid var(--border);
-    text-align: center;
+    background: var(--card); border-radius: var(--radius); padding: 16px 18px;
+    margin-top: 20px; border: 1px solid var(--border); text-align: center; box-shadow: var(--shadow);
   }
   .recipe-closer {
-    background: var(--light-bg);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-top: 20px;
-    border: 1px solid var(--border);
-    text-align: center;
+    background: linear-gradient(135deg, rgba(123,94,167,0.05), rgba(155,126,200,0.03));
+    border-radius: var(--radius); padding: 16px 18px; margin-top: 20px;
+    border: 1px solid var(--border); text-align: center;
   }
-  .workout-meta {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 11px;
-    color: var(--amber);
-    margin-top: 2px;
-  }
-  /* Password Screen */
+  .workout-meta { font-size: 10px; color: var(--amber); margin-top: 2px; }
+
+  /* ═══ FOOTER ═══ */
+  .footer { text-align: center; padding: 28px 18px 40px; border-top: 1px solid var(--border); }
+  .footer-msg { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; margin-bottom: 8px; font-size: 14px; color: var(--callout); line-height: 1.8; }
+  .footer-motto { font-family: 'Cormorant Garamond', Georgia, serif; color: var(--ecire); margin-bottom: 4px; font-size: 14px; }
+  .footer-sig { color: var(--text-muted); font-size: 11px; }
+
+  /* ═══ PASSWORD GATE ═══ */
   .gate {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #0B1B3A 0%, #1a2a4a 100%);
-    padding: 24px;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: var(--bg); padding: 24px;
   }
   .gate-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 40px 32px;
-    max-width: 360px;
-    width: 100%;
-    text-align: center;
+    background: var(--card); border-radius: var(--radius); padding: 44px 32px;
+    max-width: 360px; width: 100%; text-align: center;
+    border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0,0,0,0.06);
   }
   .gate-brand {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 10px;
-    color: var(--gold);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 24px; color: var(--heading); letter-spacing: 6px; font-weight: 300; margin-bottom: 4px;
   }
   .gate-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 20px;
-    color: var(--navy);
-    margin-bottom: 8px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px; color: var(--heading); margin-bottom: 8px; font-weight: 400;
   }
-  .gate-sub {
-    font-size: 14px;
-    color: var(--muted);
-    margin-bottom: 28px;
-    line-height: 1.6;
-  }
+  .gate-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 28px; line-height: 1.6; }
   .gate-input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 16px;
-    color: var(--navy);
-    text-align: center;
-    letter-spacing: 3px;
-    outline: none;
-    transition: border-color 0.2s;
+    width: 100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius);
+    font-family: 'DM Sans', sans-serif; font-size: 16px; color: var(--heading);
+    text-align: center; letter-spacing: 3px; outline: none; transition: border-color 0.2s;
   }
-  .gate-input:focus { border-color: var(--purple); }
+  .gate-input:focus { border-color: var(--ecire); }
   .gate-input.error { border-color: var(--red); animation: shake 0.4s ease; }
   .gate-btn {
-    width: 100%;
-    padding: 14px;
-    margin-top: 14px;
-    background: var(--purple);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
+    width: 100%; padding: 14px; margin-top: 14px;
+    background: var(--ecire); color: #fff; border: none; border-radius: var(--radius);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    letter-spacing: 1.5px; cursor: pointer; transition: background 0.2s;
   }
   .gate-btn:hover { background: #6A4F94; }
-  .gate-error-msg {
-    font-size: 13px;
-    color: var(--red);
-    margin-top: 12px;
-    min-height: 20px;
-  }
-  .gate-footer {
-    margin-top: 24px;
-    font-size: 11px;
-    color: #B8B0A4;
-  }
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-6px); }
-    75% { transform: translateX(6px); }
-  }
+  .gate-error-msg { font-size: 12px; color: var(--red); margin-top: 12px; min-height: 20px; }
+  .gate-footer { margin-top: 24px; font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; }
   .container.hidden { display: none; }
+  @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
 </style>
 </head>
 <body>
@@ -639,9 +394,22 @@
 <!-- PASSWORD SCREEN -->
 <div class="gate" id="gate">
   <div class="gate-card">
-    <div class="gate-brand">Écire Health™</div>
+    <svg width="48" height="48" viewBox="0 0 48 48" style="display:block;margin:0 auto 16px">
+      <circle cx="24" cy="24" r="15.4" fill="none" stroke="#7B5EA7" stroke-width="0.5" opacity="0.2"/>
+      <ellipse cx="24" cy="24" rx="15.1" ry="6" fill="none" stroke="#7B5EA7" stroke-width="0.6" opacity="0.15"/>
+      <ellipse cx="24" cy="24" rx="14.5" ry="6.8" fill="none" stroke="#9B7EC8" stroke-width="0.5" opacity="0.12" transform="rotate(60 24 24)"/>
+      <ellipse cx="24" cy="24" rx="13.7" ry="5.5" fill="none" stroke="#7B5EA7" stroke-width="0.4" opacity="0.1" transform="rotate(-30 24 24)"/>
+      <circle cx="24" cy="24" r="0.6" fill="#7B5EA7" opacity="0.6"/>
+      <circle cx="39.4" cy="24" r="0.7" fill="#7B5EA7" opacity="0.3"/>
+      <circle cx="28.8" cy="38.7" r="0.7" fill="#7B5EA7" opacity="0.3"/>
+      <circle cx="14.7" cy="36.2" r="0.7" fill="#7B5EA7" opacity="0.3"/>
+      <circle cx="10.6" cy="19.1" r="0.7" fill="#7B5EA7" opacity="0.3"/>
+      <circle cx="23.2" cy="8.7" r="0.7" fill="#7B5EA7" opacity="0.3"/>
+    </svg>
+    <div class="gate-brand">ÉCIRE</div>
+    <div style="font-size:9px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px">Health™</div>
     <div class="gate-title">Your Companion Guide</div>
-    <div class="gate-sub">Enter the access code Dr. Hammond sent you.</div>
+    <div class="gate-sub">Enter your access code.</div>
     <input class="gate-input" id="gateInput" type="text" placeholder="Access code" autocomplete="off" autofocus>
     <button class="gate-btn" id="gateBtn" onclick="checkCode()">Open Guide</button>
     <div class="gate-error-msg" id="gateError"></div>
@@ -652,9 +420,19 @@
 <div class="container hidden" id="mainContent">
   <!-- HEADER -->
   <div class="header">
-    <div class="header-label">Écire Health™ · Week 1</div>
+    <div class="header-brand">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="7.7" fill="none" stroke="#7B5EA7" stroke-width="0.5" opacity="0.2"/>
+        <ellipse cx="12" cy="12" rx="7.5" ry="3" fill="none" stroke="#7B5EA7" stroke-width="0.6" opacity="0.15"/>
+        <ellipse cx="12" cy="12" rx="7.2" ry="3.4" fill="none" stroke="#9B7EC8" stroke-width="0.5" opacity="0.12" transform="rotate(60 12 12)"/>
+        <ellipse cx="12" cy="12" rx="6.8" ry="2.8" fill="none" stroke="#7B5EA7" stroke-width="0.4" opacity="0.1" transform="rotate(-30 12 12)"/>
+        <circle cx="12" cy="12" r="0.3" fill="#7B5EA7" opacity="0.6"/>
+      </svg>
+      <span>ÉCIRE</span>
+    </div>
+    <div class="header-label">Week 1 · Companion Guide</div>
     <div class="header-title">Your Companion Guide</div>
-    <div class="header-sub">A collection of resources — the why behind each strategy, practical ideas, and answers to your questions.</div>
+    <div class="header-sub">The science behind your strategies, practical tools, and space to design your week.</div>
   </div>
 
   <div class="banner">This week, every plate starts with protein. Everything else fills in around it.</div>
@@ -672,73 +450,210 @@
 
   <div class="content">
 
-    <!-- ═══════ STRATEGY TAB ═══════ -->
+    <!-- ═══════ STRATEGY TAB (REDESIGNED) ═══════ -->
     <div class="tab-panel active" id="panel-strategy">
-      <p class="p" style="font-size:12px;color:var(--muted);font-style:italic;margin-bottom:16px;line-height:1.7">Not a checklist. Not instructions. Each strategy here targets a specific process in your body. The science is here — not as homework, but so you can see for yourself how the pieces connect.</p>
 
-      <div class="strategy-card">
-        <span class="strategy-badge" style="background:var(--purple)">Every Day</span>
-        <div class="strategy-what">Protein — 130g per day, protein first at every meal.</div>
-        <div class="strategy-why">Your body has been underfed. It's been breaking down muscle for fuel. Protein reverses this — and within 3–5 days, your satiety hormones respond and cravings begin to quiet.</div>
-        <div class="strategy-how">~43g per meal. The idea is to reach for the protein first on the plate. See the Your Plate tab to build meals from whatever you have on hand.</div>
+      <p style="font-size:12px;color:var(--text-muted);font-style:italic;margin-bottom:8px;line-height:1.8;text-align:center;max-width:380px;margin-left:auto;margin-right:auto">Not a checklist. Not instructions. Each strategy targets a specific process in your body. Tap any card to see the science.</p>
+
+      <!-- Foundation — Every Day -->
+      <div class="strat-section-divider">
+        <div class="line" style="background:linear-gradient(90deg,transparent,rgba(123,94,167,0.25))"></div>
+        <div class="label" style="color:var(--ecire)">Foundation · Every Day</div>
+        <div class="line" style="background:linear-gradient(90deg,rgba(123,94,167,0.25),transparent)"></div>
       </div>
 
-      <div class="strategy-card">
-        <span class="strategy-badge" style="background:var(--purple)">Every Day</span>
-        <div class="strategy-what">Your 8pm evening anchor.</div>
-        <div class="strategy-why">When insulin falls before sleep, your body releases stored fat overnight. Growth hormone mobilizes it from visceral stores — the fat behind your midsection. The anchor protects this entire sequence.</div>
-        <div class="strategy-how">You already have the alarm — and it's working most nights. For late work nights, having pre-made protein in the fridge (hard-boiled eggs with pepper sauce, cottage cheese) so the midnight choice is protein-forward without any effort.</div>
+      <!-- 01 FUEL -->
+      <div class="strategy-card" onclick="toggleStrategy(this)">
+        <div class="strategy-header">
+          <div class="strategy-num" style="border-color:var(--ecire);color:var(--ecire)">01</div>
+          <div class="strategy-content">
+            <div class="strategy-tag" style="color:var(--ecire)">Fuel</div>
+            <div class="strategy-what">Protein — 130g per day, protein first at every meal.</div>
+          </div>
+          <span class="strategy-arrow">▼</span>
+        </div>
+        <div class="strategy-detail">
+          <div class="strategy-detail-label">What This Activates</div>
+          <div class="strategy-why">Your body has been underfed. It's been breaking down muscle for fuel. Protein reverses this — and within 3–5 days, your satiety hormones respond and cravings begin to quiet.</div>
+          <div class="strategy-detail-label" style="color:var(--hit)">How</div>
+          <div class="strategy-how">~43g per meal. The idea is to reach for the protein first on the plate. See the Your Plate tab to build meals from whatever you have on hand.</div>
+        </div>
       </div>
 
-      <div class="strategy-card">
-        <span class="strategy-badge" style="background:var(--purple)">Every Day</span>
-        <div class="strategy-what">Your three supplements.</div>
-        <div class="strategy-why">Vitamin D at 16 impairs insulin sensitivity. Magnesium is required for every unit of energy your mitochondria produce. Omega-3 interrupts the inflammatory cycle.</div>
-        <div class="strategy-how">With breakfast: Sports Research D3+K2 softgel + Nordic Naturals Ultimate Omega Liquid (1 tsp, lemon, no pill). Before bed: Pure Encapsulations Magnesium Glycinate or Natural Calm powder in warm water.</div>
+      <!-- 02 TIMING -->
+      <div class="strategy-card" onclick="toggleStrategy(this)">
+        <div class="strategy-header">
+          <div class="strategy-num" style="border-color:var(--ecire);color:var(--ecire)">02</div>
+          <div class="strategy-content">
+            <div class="strategy-tag" style="color:var(--ecire)">Timing</div>
+            <div class="strategy-what">Your 8pm evening anchor.</div>
+          </div>
+          <span class="strategy-arrow">▼</span>
+        </div>
+        <div class="strategy-detail">
+          <div class="strategy-detail-label">What This Activates</div>
+          <div class="strategy-why">When insulin falls before sleep, your body releases stored fat overnight. Growth hormone mobilizes it from visceral stores — the fat behind your midsection. The anchor protects this entire sequence.</div>
+          <div class="strategy-detail-label" style="color:var(--hit)">How</div>
+          <div class="strategy-how">You already have the alarm — and it's working most nights. For late work nights, having pre-made protein in the fridge (hard-boiled eggs with pepper sauce, cottage cheese) so the midnight choice is protein-forward without any effort.</div>
+        </div>
       </div>
 
-      <div class="strategy-card">
-        <span class="strategy-badge" style="background:var(--purple)">Every Day</span>
-        <div class="strategy-what">Tracking in MyÉcire — about 60 seconds.</div>
-        <div class="strategy-why">I review your data before every session. Continuous data means I can adjust in real time — before you even walk in.</div>
-        <div class="strategy-how">Protein (estimated grams), fasting window, sleep, supplements. That's all — nothing complicated.</div>
+      <!-- 03 SLEEP -->
+      <div class="strategy-card" onclick="toggleStrategy(this)">
+        <div class="strategy-header">
+          <div class="strategy-num" style="border-color:var(--ecire);color:var(--ecire)">03</div>
+          <div class="strategy-content">
+            <div class="strategy-tag" style="color:var(--ecire)">Sleep</div>
+            <div class="strategy-what">Protect your sleep quality — everything else builds on this.</div>
+          </div>
+          <span class="strategy-arrow">▼</span>
+        </div>
+        <div class="strategy-detail">
+          <div class="strategy-detail-label">What This Activates</div>
+          <div class="strategy-why">During deep sleep, your body clears waste from the brain, releases growth hormone for muscle repair, restores insulin sensitivity, and drops cortisol to its lowest point. Even one night of poor sleep measurably increases insulin resistance the next day. Sleep is the foundation everything else is built on.</div>
+          <div class="strategy-detail-label" style="color:var(--hit)">How</div>
+          <div class="strategy-how">Your magnesium glycinate before bed supports sleep quality directly — it activates GABA receptors, the same calming pathway as prescription sleep aids, but gently. Keep your room cool (65–68°F). No caffeine after noon. Morning sunlight within 30 minutes of waking sets your circadian clock for the night ahead. The goal is 7–9 hours — not all at once if that's not where you are. Any improvement counts.</div>
+        </div>
       </div>
 
-      <div class="strategy-card">
-        <span class="strategy-badge" style="background:var(--sage)">2× This Week</span>
-        <div class="strategy-what">Resistance training — 20 minutes.</div>
-        <div class="strategy-why">Your muscles handle ~80% of glucose disposal. Every session activates transporters that clear blood sugar without insulin. This is the most direct intervention for your A1c.</div>
-        <div class="strategy-how">Bodyweight at home is fully valid. See the Training tab for three workouts. If you'd like, message me in the app — we can design the plan together.</div>
+      <!-- 04 SUPPLEMENTATION -->
+      <div class="strategy-card" onclick="toggleStrategy(this)">
+        <div class="strategy-header">
+          <div class="strategy-num" style="border-color:var(--ecire);color:var(--ecire)">04</div>
+          <div class="strategy-content">
+            <div class="strategy-tag" style="color:var(--ecire)">Supplementation</div>
+            <div class="strategy-what">Vitamin D · Magnesium Glycinate · Omega-3</div>
+          </div>
+          <span class="strategy-arrow">▼</span>
+        </div>
+        <div class="strategy-detail">
+          <div class="strategy-detail-label">What This Activates</div>
+          <div class="strategy-why">Vitamin D at 16 impairs insulin sensitivity and bone health. Magnesium is required for every unit of energy your mitochondria produce — and supports sleep. Omega-3 (EPA + DHA) interrupts the inflammatory cycle driving your metabolic resistance.</div>
+
+          <div class="strategy-detail-label" style="color:var(--hit)">Vitamin D — Continue What You're Taking</div>
+          <div class="strategy-how">You're already supplementing — keep going. Your level at 16 is critically low and needs consistent daily dosing to recover. Sports Research D3+K2 (5000 IU) if you want to switch to the one I recommend. The K2 directs calcium into bone instead of arteries.</div>
+
+          <div class="strategy-detail-label" style="color:var(--hit)">Magnesium — Glycinate Specifically</div>
+          <div class="strategy-how">Magnesium Glycinate is the form that matters here — it crosses the blood-brain barrier and supports sleep, calm, and muscle recovery. Other forms (oxide, citrate) are poorly absorbed or have laxative effects. Pure Encapsulations Magnesium Glycinate, 2 capsules before bed. ~$20/mo at Amazon or Whole Foods.</div>
+
+          <div class="strategy-detail-label" style="color:var(--hit)">Omega-3 — Food First</div>
+          <div class="strategy-how">You mentioned you'd rather eat your omega-3 than take a supplement — that works. Here's what it takes to reach ~2,000mg EPA+DHA per day through food:<br><br>
+            <strong style="color:var(--heading)">Best sources (EPA + DHA — ready to use):</strong><br>
+            · Salmon (4 oz serving) — ~1,800mg. Two servings per week covers most of your need.<br>
+            · Sardines (3.5 oz) — ~1,400mg<br>
+            · Mackerel (3.5 oz) — ~2,600mg<br><br>
+            <strong style="color:var(--heading)">Plant sources (ALA — your body converts ~5–10% to EPA/DHA):</strong><br>
+            · Chia seeds (2 tbsp) — ~5,000mg ALA → ~250–500mg usable<br>
+            · Ground flax meal (2 tbsp) — ~3,200mg ALA → ~160–320mg usable<br>
+            · Hemp hearts (2 tbsp) — ~1,000mg ALA → ~50–100mg usable<br><br>
+            The Magic Stardust blend (chia + flax + hemp hearts) adds plant-based omega-3 daily, but the conversion rate means it supplements — it doesn't replace — fatty fish. If you're eating salmon or other fatty fish 2–3 times per week, you may not need a supplement at all.<br><br>
+            <strong style="color:var(--heading)">If you need a backup:</strong> Nordic Naturals Ultimate Omega Liquid — lemon flavor, 1 teaspoon with any meal. No pills. ~$30/mo.</div>
+
+          <div class="strategy-detail-label" style="color:var(--amber)">Monthly Cost</div>
+          <div class="strategy-how">Vitamin D (continuing yours) — $0 additional<br>Magnesium Glycinate — ~$20/mo<br>Omega-3 supplement (if needed) — ~$30/mo<br>If eating fish 2–3×/week: ~$20/mo total. With supplement backup: ~$50/mo.</div>
+        </div>
       </div>
 
-      <div class="strategy-card">
-        <span class="strategy-badge" style="background:var(--brown)">This Week</span>
-        <div class="strategy-what">Your lab order is ready.</div>
-        <div class="strategy-why">Fasting insulin catches resistance 5–10 years before A1c. These labs reveal what your current tests are hiding.</div>
-        <div class="strategy-how">Rupa Health link coming by email. 10–12 hour fast, water is fine. ~$93–150.</div>
+      <!-- 05 MEASUREMENT -->
+      <div class="strategy-card" onclick="toggleStrategy(this)">
+        <div class="strategy-header">
+          <div class="strategy-num" style="border-color:var(--ecire);color:var(--ecire)">05</div>
+          <div class="strategy-content">
+            <div class="strategy-tag" style="color:var(--ecire)">Measurement</div>
+            <div class="strategy-what">Tracking in MyÉcire — about 60 seconds.</div>
+          </div>
+          <span class="strategy-arrow">▼</span>
+        </div>
+        <div class="strategy-detail">
+          <div class="strategy-detail-label">What This Activates</div>
+          <div class="strategy-why">I review your data before every session. Continuous data means I can adjust in real time — before you even walk in.</div>
+          <div class="strategy-detail-label" style="color:var(--hit)">How</div>
+          <div class="strategy-how">Protein (estimated grams), fasting window, sleep, supplements. That's all — nothing complicated.</div>
+        </div>
       </div>
 
-      <div class="strategy-card">
-        <span class="strategy-badge" style="background:var(--brown)">This Week</span>
-        <div class="strategy-what">Your supplement list.</div>
-        <div class="strategy-why">These depletions drag on every other intervention.</div>
-        <div class="strategy-how">Sports Research D3+K2 — Amazon/Target · ~$15/mo. Pure Encapsulations Mg Glycinate OR Natural Calm — Amazon/Whole Foods · ~$20/mo. Nordic Naturals Omega Liquid — Amazon/Whole Foods/Sprouts · ~$30/mo. About $65/mo total.</div>
+      <!-- This Week -->
+      <div class="strat-section-divider">
+        <div class="line" style="background:linear-gradient(90deg,transparent,rgba(61,139,94,0.25))"></div>
+        <div class="label" style="color:var(--hit)">This Week</div>
+        <div class="line" style="background:linear-gradient(90deg,rgba(61,139,94,0.25),transparent)"></div>
+      </div>
+
+      <!-- 06 RESISTANCE -->
+      <div class="strategy-card" onclick="toggleStrategy(this)">
+        <div class="strategy-header">
+          <div class="strategy-num" style="border-color:var(--hit);color:var(--hit)">06</div>
+          <div class="strategy-content">
+            <div class="strategy-tag" style="color:var(--hit)">Resistance · 2× This Week</div>
+            <div class="strategy-what">Resistance training — 20 minutes.</div>
+          </div>
+          <span class="strategy-arrow">▼</span>
+        </div>
+        <div class="strategy-detail">
+          <div class="strategy-detail-label">What This Activates</div>
+          <div class="strategy-why">Your muscles handle ~80% of glucose disposal. Every session activates transporters that clear blood sugar without insulin. This is the most direct intervention for your A1c.</div>
+          <div class="strategy-detail-label" style="color:var(--hit)">How</div>
+          <div class="strategy-how">Bodyweight at home is fully valid. See the Training tab for three workouts. If you'd like, message me in the app — we can design the plan together.</div>
+        </div>
+      </div>
+
+      <!-- 07 SPRINTS -->
+      <div class="strategy-card" onclick="toggleStrategy(this)">
+        <div class="strategy-header">
+          <div class="strategy-num" style="border-color:var(--hit);color:var(--hit)">07</div>
+          <div class="strategy-content">
+            <div class="strategy-tag" style="color:var(--hit)">Sprints · 1× This Week</div>
+            <div class="strategy-what">Sprint Interval Training — 10 minutes total.</div>
+          </div>
+          <span class="strategy-arrow">▼</span>
+        </div>
+        <div class="strategy-detail">
+          <div class="strategy-detail-label">What This Activates</div>
+          <div class="strategy-why">30 seconds of all-out effort triggers an epigenetic shift in your muscle tissue. Your muscles release myokines that tell your liver to stop storing visceral fat. GLUT4 transporters open — pulling glucose in without insulin. Growth hormone spikes, then cortisol drops. This is the most time-efficient metabolic intervention available.</div>
+          <div class="strategy-detail-label" style="color:var(--hit)">The Protocol</div>
+          <div class="strategy-how">Warm up 3–5 minutes. Then:<br><br><strong style="color:var(--heading)">30 seconds ALL OUT</strong> → 2 minutes recovery → repeat <strong style="color:var(--heading)">4 rounds</strong><br><br>Cool down 2–3 minutes. Total session: ~10 minutes. Any apparatus works — treadmill, bike, stairs, running in place. It's a heart rate function, not an equipment function. Once this week to start.</div>
+        </div>
+      </div>
+
+      <!-- 08 DIAGNOSTICS -->
+      <div class="strategy-card" onclick="toggleStrategy(this)">
+        <div class="strategy-header">
+          <div class="strategy-num" style="border-color:var(--amber);color:var(--amber)">08</div>
+          <div class="strategy-content">
+            <div class="strategy-tag" style="color:var(--amber)">Diagnostics</div>
+            <div class="strategy-what">Your lab order is ready.</div>
+          </div>
+          <span class="strategy-arrow">▼</span>
+        </div>
+        <div class="strategy-detail">
+          <div class="strategy-detail-label">What This Activates</div>
+          <div class="strategy-why">Fasting insulin catches resistance 5–10 years before A1c. These labs reveal what your current tests are hiding.</div>
+          <div class="strategy-detail-label" style="color:var(--hit)">How</div>
+          <div class="strategy-how">Rupa Health link coming by email. 10–12 hour fast, water is fine. ~$93–150.</div>
+        </div>
+      </div>
+
+      <!-- Fold In -->
+      <div class="strat-section-divider">
+        <div class="line" style="background:linear-gradient(90deg,transparent,rgba(155,126,200,0.2))"></div>
+        <div class="label" style="color:var(--ecire-soft)">When Ready</div>
+        <div class="line" style="background:linear-gradient(90deg,rgba(155,126,200,0.2),transparent)"></div>
       </div>
 
       <div class="fold-in-box">
-        <div class="fold-in-label">Fold In When Ready — No Pressure</div>
-        <p class="p" style="margin-bottom:6px">10-minute walk after dinner (start with 5 if 10 feels like too much)</p>
-        <p class="p" style="margin-bottom:6px">Ceremonial matcha in the morning (no sugar — yours has too much)</p>
-        <p class="p" style="margin-bottom:0">Magic Stardust — hemp hearts + chia + flax, 2 tbsp on anything</p>
+        <div class="fold-in-label">Three to Fold In — No Pressure</div>
+        <div class="fold-in-item"><div class="fold-in-dot"></div><span>10-minute walk after dinner (start with 5 if 10 feels like too much)</span></div>
+        <div class="fold-in-item"><div class="fold-in-dot"></div><span>Ceremonial matcha in the morning (no sugar — yours has too much)</span></div>
+        <div class="fold-in-item"><div class="fold-in-dot"></div><span>Magic Stardust — hemp hearts + chia + flax, 2 tbsp on anything</span></div>
       </div>
 
       <div class="not-doing-box">
         <div class="not-doing-label">What We Are Not Doing</div>
-        <p class="p" style="margin-bottom:6px">No calorie counting. No restriction. No metabolic fasting. No scale.</p>
-        <p class="p" style="margin-bottom:0;font-style:italic">Your spiritual fasting is yours — we protect it completely. Your body has been underfed. 130g of protein is not a diet. It is permission to eat.</p>
+        <p class="p" style="margin-bottom:6px;color:var(--text-dim)">No calorie counting. No restriction. No metabolic fasting. No scale.</p>
+        <p class="p" style="margin-bottom:0;font-style:italic;color:var(--callout)">Your spiritual fasting is yours — we protect it completely. Your body has been underfed. 130g of protein is not a diet. It is permission to eat.</p>
       </div>
     </div>
-
+    </div>
     <!-- ═══════ YOUR PLATE TAB ═══════ -->
     <div class="tab-panel" id="panel-plate">
       <div class="section-title">Build Your Plate</div>
@@ -839,11 +754,12 @@
     <div class="tab-panel" id="panel-walking">
       <div class="section-title">The Post-Meal Walk</div>
       <p class="p">You said there's friction — and you're right. Here are options built around your real life.</p>
-      <div class="science-box">A 10-minute walk after eating activates GLUT4 transporters through AMPK — your muscles pull glucose from your blood without needing insulin. The spike flattens within minutes.</div>
+      <div class="science-box">Any muscle contraction after eating activates GLUT4 transporters through AMPK — your muscles pull glucose from your blood without needing insulin. Walking, air squats, push-ups — the mechanism is the same. The spike flattens within minutes.</div>
 
       <div class="walk-card"><div class="walk-title">After dinner — your best window</div><div class="walk-body">Some ideas: walking around the block, walking inside — stairs, around the house, talking to one of your kids. Even 5 minutes to the end of the street and back is enough to start.</div></div>
       <div class="walk-card"><div class="walk-title">After lunch at work — the stealth walk</div><div class="walk-body">Some options: refilling your water, walking to a colleague's desk, trying the furthest bathroom, or going downstairs and back up — the stairs alone are enough. You don't need workout clothes.</div></div>
       <div class="walk-card"><div class="walk-title">Breakfast in the car — already covered</div><div class="walk-body">The walk from your parking spot into work counts. Parking a little further away gives you a few extra minutes. The glucose is being cleared while you walk in.</div></div>
+      <div class="walk-card"><div class="walk-title">Can't walk? Move in place.</div><div class="walk-body">10 air squats or a set of push-ups after a meal activates the same GLUT4 transporters as walking. Any muscle contraction pulls glucose from your blood. Standing up from your desk and doing a few squats takes 30 seconds and nobody needs to know.</div></div>
 
       <div class="fold-note">This is a fold-in — not a Foundation goal. Do it when it works. Skip it when it doesn't. There is no failure here.</div>
     </div>
@@ -864,13 +780,65 @@
 
   <!-- FOOTER -->
   <div class="footer">
+    <svg width="48" height="48" viewBox="0 0 48 48" style="display:block;margin:0 auto 16px;opacity:0.4">
+      <circle cx="24" cy="24" r="15.4" fill="none" stroke="#7B5EA7" stroke-width="0.5" opacity="0.2"/>
+      <ellipse cx="24" cy="24" rx="15.1" ry="6" fill="none" stroke="#7B5EA7" stroke-width="0.6" opacity="0.15"/>
+      <ellipse cx="24" cy="24" rx="14.5" ry="6.8" fill="none" stroke="#9B7EC8" stroke-width="0.5" opacity="0.12" transform="rotate(60 24 24)"/>
+      <ellipse cx="24" cy="24" rx="13.7" ry="5.5" fill="none" stroke="#7B5EA7" stroke-width="0.4" opacity="0.1" transform="rotate(-30 24 24)"/>
+      <circle cx="24" cy="24" r="0.6" fill="#7B5EA7" opacity="0.6"/>
+    </svg>
     <p class="p footer-msg">This is a guide to help build a better system to support you. You said you want less noise about your body. We're going to quiet it — from the inside out.</p>
     <p class="p footer-motto">You don't have to be perfect. You have to keep going.</p>
     <p class="p footer-sig">— Dr. Hammond · Écire Health™</p>
+
+    <!-- Medical Disclaimer -->
+    <div style="margin-top:28px;padding:16px 14px;background:var(--light-bg);border-radius:10px;border:1px solid var(--border)">
+      <p style="font-family:'DM Sans',system-ui,sans-serif;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-weight:500;margin-bottom:8px">Medical Disclaimer</p>
+      <p style="font-family:'DM Sans',system-ui,sans-serif;font-size:9px;color:var(--muted);line-height:1.8;margin-bottom:0">
+        The content provided through Écire is for informational and educational purposes only and is not intended as a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read or accessed through this material. This content is part of a physician-led protocol under the direct supervision of Dr. Gmerice Hammond, MD, MPH. Écire does not establish a physician-patient relationship outside of existing clinical agreements. If you think you may have a medical emergency, call your doctor or 911 immediately.
+      </p>
+    </div>
+
+    <!-- Intellectual Property -->
+    <div style="margin-top:10px;padding:16px 14px;background:var(--light-bg);border-radius:10px;border:1px solid var(--border)">
+      <p style="font-family:'DM Sans',system-ui,sans-serif;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-weight:500;margin-bottom:8px">Intellectual Property</p>
+      <p style="font-family:'DM Sans',system-ui,sans-serif;font-size:9px;color:var(--muted);line-height:1.8;margin-bottom:0">
+        Écire™, the Écire logo, "Metabolic Alignment System™," "The Essentialist Plate™," "Generational Health™," "Interpregnancy Metabolic Alignment™," "GLIDE™," and all associated branding, content, frameworks, protocols, and methodologies are the proprietary intellectual property of Écire Consulting Group, LLC. All rights reserved. No part of this material, its content, design, or underlying systems may be reproduced, distributed, transmitted, displayed, published, or broadcast without the prior written permission of Écire Consulting Group, LLC.
+      </p>
+    </div>
+
+    <!-- Copyright & Attribution -->
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);text-align:center">
+      <p style="font-family:'DM Sans',system-ui,sans-serif;font-size:10px;color:var(--muted);margin-bottom:6px;letter-spacing:1px">
+        © 2026 Écire Health™. All rights reserved.
+      </p>
+      <p style="font-family:'DM Sans',system-ui,sans-serif;font-size:9px;color:var(--muted);margin-bottom:4px;opacity:0.7">
+        Écire Health™ · Metabolic Alignment System™ · Generational Health™ · The Essentialist Plate™ · Interpregnancy Metabolic Alignment™ · GLIDE™
+      </p>
+      <p style="font-family:'DM Sans',system-ui,sans-serif;font-size:9px;color:var(--muted);margin-bottom:4px;opacity:0.5">
+        Trademarks of Écire Consulting Group, LLC.
+      </p>
+      <p style="font-family:'DM Sans',system-ui,sans-serif;font-size:9px;color:var(--muted);margin-bottom:4px;opacity:0.4">
+        Dr. Gmerice Hammond, MD, MPH — Founder of Écire Health™
+      </p>
+      <p style="font-family:'DM Sans',system-ui,sans-serif;font-size:9px;color:var(--muted);opacity:0.3">
+        Patent pending. Proprietary content and systems protected under U.S. copyright and intellectual property law.
+      </p>
+    </div>
   </div>
 </div>
 
+
 <script>
+// ═══════ STRATEGY EXPAND/COLLAPSE ═══════
+function toggleStrategy(card) {
+  const detail = card.querySelector('.strategy-detail');
+  const arrow = card.querySelector('.strategy-arrow');
+  const isOpen = detail.classList.contains('open');
+  // Close all others
+  document.querySelectorAll('.strategy-detail.open').forEach(d => { d.classList.remove('open'); d.closest('.strategy-card').querySelector('.strategy-arrow').classList.remove('open'); });
+  if (!isOpen) { detail.classList.add('open'); arrow.classList.add('open'); }
+}
 // ═══════ DATA ═══════
 const proteins = [
   { name:"Chicken breast", emoji:"🍗", amount43:"5 oz (1.5 palm-sized pieces)", tip:"Sliced, shredded, or cubed — however you cooked it" },
@@ -1116,7 +1084,7 @@ function checkCode() {
     window.scrollTo(0, 0);
   } else {
     input.classList.add('error');
-    error.textContent = 'That code didn\u2019t match. Check the message from Dr. Hammond.';
+    error.textContent = 'That code didn\u2019t match. Please try again.';
     setTimeout(() => input.classList.remove('error'), 400);
   }
 }
